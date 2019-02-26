@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -20,14 +19,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val tankArray = ArrayList<Tankable>()
+        tankArray.add(T34(100, 100, 100, "Drug"))
+        tankArray.add(Pantera(100, 100))
+
+        tankArray.forEach {
+            it.getFuelValue()
+            it.getFuelValue()
+            if (it is Amorable) {
+                it.die()
+            }
+        }
+
+
         btn_start.setOnClickListener{ startSingleton() }
         btn_add_player.setOnClickListener { addPlayer() }
         btn_start_new_screen.setOnClickListener { updateActivtiy()}
     }
 
     private fun updateActivtiy() {
-        onRestart()
-        Log.e(TAG, "onRestart")
+        startActivity(Intent(applicationContext, MainActivity::class.java))
     }
 
     private fun addPlayer() {
